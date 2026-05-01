@@ -25,6 +25,24 @@ DRONE STATUS:
 ✓ LANDED — Reward: 92.9
 ```
 
+## Visualization
+
+### Successful Landing
+
+![Success Trajectory](docs/trajectory_success.png)
+
+The agent starts with ALIGN strategy, moving the drone horizontally to position it above the moving platform. Once aligned, the LLM switches to LAND strategy (blue zone in timeline), and the rule-based controller executes a gentle descent onto the platform. The diamonds on the trajectory mark LLM decision points.
+
+![Success Animation](docs/trajectory_success.gif)
+
+### Crash Example
+
+![Crash Trajectory](docs/trajectory_crash.png)
+
+In this episode, the drone fails to slow its descent in time. The LLM correctly identifies the need to land, but the rule-based controller's thresholds don't brake aggressively enough at high speeds, resulting in a crash. This highlights the limitation of fixed thresholds vs learned policies — an RL agent would have learned more conservative behavior through trial and error.
+
+The timeline clearly shows when the LLM switches strategies, demonstrating the hybrid architecture in action.
+
 ---
 
 ## Architecture
